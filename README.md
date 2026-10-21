@@ -1,4 +1,4 @@
-# mame0.289 CV1000 test environment for Claude
+# MAME 0.289 CV1000 test environment for Claude
 ## To Do
 1. Add Akai Katana and SDOJ
 
