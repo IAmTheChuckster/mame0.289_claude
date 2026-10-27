@@ -1,6 +1,4 @@
-# MAME 0.289 CV1000 test environment for Claude
-## To Do
-1. Add Akai Katana and SDOJ
+# Headless MAME 0.289 environment for CV1000
 
 ## About this
-Send this to Claude so you don't have to wait for it to compile
+Send this to Claude so you don't have to wait for it to compile, has Akai Katana and DoDonPachi Saidaioujou enabled
