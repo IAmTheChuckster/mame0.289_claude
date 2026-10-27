@@ -1,0 +1,1 @@
+libsdl2-2.0-0 libsdl2-ttf-2.0-0 libfontconfig1 libasound2t64 libpulse0 libgl1 libxi6 libsamplerate0
