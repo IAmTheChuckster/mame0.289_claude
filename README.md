@@ -1,15 +1,13 @@
 # CV1000 headless MAME test environment (MAME 0.289)
 
-## To do
-remove all mentions of akai katana and sdoj
-
-## About
-
 A CV1000-only MAME 0.289 build (`bin/cv1k`, Linux x86-64) with **Akai Katana (`akatana`)** and
 **DoDonPachi SaiDaiOuJou (`ddpsdoj`)** re-enabled, plus scripts for scripted, headless runs.
 Both sets were removed from upstream MAME in Dec 2021 at the rights holder's request; this build
 re-enables the existing driver entries for private testing with your own dumps. No ROM data is included.
 All other CV1000 sets (mmpork, dfkbl, deathsml, pinkswts, ibarablk, ...) work too.
+
+## To do
+remove all mentions of akai katana and sdoj
 
 ## ROMs
 Put your sets in `roms/` as `akatana.zip` / `ddpsdoj.zip` (or folders `roms/akatana/`). Files and CRC32s:
