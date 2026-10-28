@@ -3,6 +3,8 @@
 ## To do
 remove all mentions of akai katana and sdoj
 
+## About
+
 A CV1000-only MAME 0.289 build (`bin/cv1k`, Linux x86-64) with **Akai Katana (`akatana`)** and
 **DoDonPachi SaiDaiOuJou (`ddpsdoj`)** re-enabled, plus scripts for scripted, headless runs.
 Both sets were removed from upstream MAME in Dec 2021 at the rights holder's request; this build
