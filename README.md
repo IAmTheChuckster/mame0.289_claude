@@ -28,3 +28,8 @@ CV1000-B sets have a 2 MB u4 and 8 MB RAM at 0x0C000000-0x0C7FFFFF.
 ## Requirements / rebuild
 If `bin/cv1k` won't start, install the libraries in `bin/apt_packages.txt`, or rebuild from source with
 `scripts/build_mame.sh mame0289` (needs git, gcc, python3, libsdl2-dev, libfontconfig-dev; ~30 min on 2 cores).
+
+## Credits
+- [IAmTheChuckster](https://github.com/IAmTheChuckster): project owner
+- [Claude](https://claude.ai) (Anthropic): build, harness and scripts
+- Built on [MAME](https://github.com/mamedev/mame) 0.289 by the MAME team (GPL-2.0)
