@@ -1,0 +1,5 @@
+roms/*
+!roms/.keep
+work/*
+!work/example_sched.txt
+*.zip
