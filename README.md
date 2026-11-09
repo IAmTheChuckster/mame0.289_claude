@@ -1,4 +1,4 @@
-# CV1000 headless MAME test environment (MAME 0.289)
+# MAME 0.289 headless test environment
 
 A CV1000-only MAME 0.289 build (`bin/cv1k`, Linux x86-64) plus scripts for scripted, headless runs,
 for private testing with your own dumps. No ROM data is included.
