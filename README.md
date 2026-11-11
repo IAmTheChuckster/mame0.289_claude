@@ -43,7 +43,7 @@ scripts/build_mame.sh cave     # just one, -> bin/cave
 To add a driver, add a line with its name and source files to the `case` in `scripts/build_mame.sh`.
 
 ## Testing
-Testing working with WSL Ubuntu-24.04
+Tested working with WSL Ubuntu-24.04
 1. Copy the rom to \\wsl$\Ubuntu-24.04\home\`user`\mame\roms
 2. run `cd ~/mame && GAME=dfeveron scripts/boot_test.sh 1500`
 3. screenshots are in `mame/work/snap/`rom`/`
