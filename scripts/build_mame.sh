@@ -1,9 +1,21 @@
 #!/bin/sh
-# Rebuild bin/cv1k from MAME source (default tag mame0289) with akatana and ddpsdoj re-enabled
-# and the custom matsuri15 set (Mushihime-Sama Matsuri 1.5, clone of mushisam) added.
+# Usage: scripts/build_mame.sh [driver|all] [tag] [source dir]
+# Builds one MAME binary per driver into bin/<driver> (default: all drivers, tag mame0289).
+#   cv1k : CV1000 driver, with akatana and ddpsdoj re-enabled and the custom matsuri15 set added
+#   cave : MAME's older 68000-based Cave driver (dfeveron, feversos, ...)
+# To add a driver: add a line to the case below with its name and its source files.
 set -e
 HERE=$(cd "$(dirname "$0")/.." && pwd)
-TAG=${1:-mame0289}; DIR=${2:-$HOME/mame-src}
+case "$1" in mame*) set -- all "$@";; esac   # old usage: build_mame.sh <tag>
+DRIVER=${1:-all}; TAG=${2:-mame0289}; DIR=${3:-$HOME/mame-src}
+DRIVERS="cv1k cave"
+CV1K_V=src/mame/cave/cv1k_v.cpp; for i in 0 1 2 3 4 5 6 7 8; do CV1K_V=$CV1K_V,src/mame/cave/cv1k_v_blit$i.cpp; done
+case "$DRIVER" in
+  all)  for d in $DRIVERS; do sh "$0" "$d" "$TAG" "$DIR"; done; exit 0;;
+  cv1k) SOURCES=src/mame/cave/cv1k.cpp,$CV1K_V;;
+  cave) SOURCES=src/mame/atlus/cave.cpp,src/mame/atlus/cave_v.cpp,src/mame/atlus/sprite013.cpp;;
+  *)    echo "unknown driver '$DRIVER' (known: $DRIVERS, all)" >&2; exit 1;;
+esac
 [ -d "$DIR" ] || git clone --depth 1 --branch "$TAG" https://github.com/mamedev/mame.git "$DIR"
 cd "$DIR"
 python3 - <<'PY'
@@ -42,6 +54,6 @@ if '\nmatsuri15\n' not in t:
     t=t.replace('\nmushisam\n','\nmushisam\nmatsuri15\n',1)
 open(l,'w').write(t)
 PY
-make USE_QTDEBUG=0 SUBTARGET=cv1k SOURCES=src/mame/cave/cv1k.cpp,src/mame/cave/cv1k_v.cpp,src/mame/cave/cv1k_v_blit0.cpp,src/mame/cave/cv1k_v_blit1.cpp,src/mame/cave/cv1k_v_blit2.cpp,src/mame/cave/cv1k_v_blit3.cpp,src/mame/cave/cv1k_v_blit4.cpp,src/mame/cave/cv1k_v_blit5.cpp,src/mame/cave/cv1k_v_blit6.cpp,src/mame/cave/cv1k_v_blit7.cpp,src/mame/cave/cv1k_v_blit8.cpp NO_USE_PORTAUDIO=1 NO_USE_PIPEWIRE=1 NOWERROR=1 REGENIE=1 OPTIMIZE=2 SYMBOLS=0 -j"$(nproc)"
-cp cv1k "$HERE/bin/cv1k"
-strip "$HERE/bin/cv1k"   # drop debug info: ~67 MB -> ~46 MB
+make USE_QTDEBUG=0 SUBTARGET="$DRIVER" SOURCES="$SOURCES" NO_USE_PORTAUDIO=1 NO_USE_PIPEWIRE=1 NOWERROR=1 REGENIE=1 OPTIMIZE=2 SYMBOLS=0 -j"$(nproc)"
+cp "$DRIVER" "$HERE/bin/$DRIVER"
+strip "$HERE/bin/$DRIVER"   # drop debug info (cv1k: ~67 MB -> ~46 MB)

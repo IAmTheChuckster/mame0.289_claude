@@ -1,14 +1,18 @@
 # MAME 0.289 headless test environment
 
-A CV1000-only MAME 0.289 build (`bin/cv1k`, Linux x86-64) plus scripts for scripted, headless runs,
+Small MAME 0.289 builds (Linux x86-64), one per driver in `bin/`, plus scripts for scripted, headless runs,
 for private testing with your own dumps. No ROM data is included.
-Works with the CV1000 sets (mmpork, dfkbl, deathsml, pinkswts, ibarablk, ...).
-`scripts/build_mame.sh` also adds `matsuri15` (Mushihime-Sama Matsuri 1.5, custom set, clone of `mushisam`;
-files `matsuri15_u4`, `matsuri15_u2`, `u23`, `u24`). It is only in binaries built with the updated script.
+
+## Supported
+- **CV1000 driver** (`bin/cv1k`): all CV1000 sets (mmpork, dfkbl, deathsml, pinkswts, ibarablk, ...), plus `akatana`, `ddpsdoj`
+  and `matsuri15` (Mushihime-Sama Matsuri 1.5, custom set)
+- **68000 Cave driver** (`bin/cave`): dfeveron (Dangun Feveron), feversos and the other sets in MAME's `cave.cpp`
+
+The scripts pick the right binary for `GAME` automatically (or set `DRIVER=cv1k` / `DRIVER=cave`).
 
 ## ROMs
-Put your sets in `roms/` as `<set>.zip` (or folders `roms/<set>/`).
-List a set's files and checksums with `bin/cv1k -listroms <set>`; check a dump with `bin/cv1k -verifyroms <set> -rompath roms`.
+Put your sets in `roms/` as `<set>.zip`, `<set>.7z` or folders `roms/<set>/`.
+List a set's files and checksums with `bin/<driver> -listroms <set>`; check a dump with `bin/<driver> -verifyroms <set> -rompath roms`.
 
 ## Use
 ```sh
@@ -24,12 +28,19 @@ Boot twice on a fresh `work/`: the first boot initialises EEPROM/NAND ("wait a m
 Schedule files: one line per change, `frame tokens`, held until the next line; `-` = release all.
 Tokens: `U D L R` stick, `A B C Q` buttons 1-4, `K` coin, `V` service coin, `S` 1P start, `T` 2P start, `X` service mode.
 
-Board types: CV1000-D sets (`cv1k_d` machine) have a 4 MB u4 and 16 MB RAM at 0x0C000000-0x0CFFFFFF;
-CV1000-B sets have a 2 MB u4 and 8 MB RAM at 0x0C000000-0x0C7FFFFF.
+## RAM addresses
+- CV1000-D: 16 MB at 0x0C000000-0x0CFFFFFF
+- CV1000-B: 8 MB at 0x0C000000-0x0C7FFFFF
+- 68000 Cave (dfeveron): 64 KB at 0x100000-0x10FFFF (e.g. `BT_DUMP=100000:10000`); buttons 1-3 only
 
 ## Requirements / rebuild
-If `bin/cv1k` won't start, install the libraries in `bin/apt_packages.txt`, or rebuild from source with
-`scripts/build_mame.sh mame0289` (needs git, gcc, python3, libsdl2-dev, libfontconfig-dev; ~30 min on 2 cores).
+If a binary won't start, install the libraries in `bin/apt_packages.txt`, or rebuild from source
+(needs git, gcc, python3, libsdl2-dev, libfontconfig-dev; ~30 min on 2 cores per driver):
+```sh
+scripts/build_mame.sh          # all drivers
+scripts/build_mame.sh cave     # just one, -> bin/cave
+```
+To add a driver, add a line with its name and source files to the `case` in `scripts/build_mame.sh`.
 
 ## Credits
 - [IAmTheChuckster](https://github.com/IAmTheChuckster): project owner
