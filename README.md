@@ -44,7 +44,7 @@ To add a driver, add a line with its name and source files to the `case` in `scr
 
 ## Testing
 Tested working with WSL Ubuntu-24.04
-1. Copy the rom to \\wsl$\Ubuntu-24.04\home\**user**\mame\roms
+1. Copy the rom to `\\wsl$\Ubuntu-24.04\home\__user__\mame\roms`
 2. run `cd ~/mame && GAME=dfeveron scripts/boot_test.sh 1500`
 3. screenshots are in `mame/work/snap/rom/`
 
