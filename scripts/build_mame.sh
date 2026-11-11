@@ -44,3 +44,4 @@ open(l,'w').write(t)
 PY
 make USE_QTDEBUG=0 SUBTARGET=cv1k SOURCES=src/mame/cave/cv1k.cpp,src/mame/cave/cv1k_v.cpp,src/mame/cave/cv1k_v_blit0.cpp,src/mame/cave/cv1k_v_blit1.cpp,src/mame/cave/cv1k_v_blit2.cpp,src/mame/cave/cv1k_v_blit3.cpp,src/mame/cave/cv1k_v_blit4.cpp,src/mame/cave/cv1k_v_blit5.cpp,src/mame/cave/cv1k_v_blit6.cpp,src/mame/cave/cv1k_v_blit7.cpp,src/mame/cave/cv1k_v_blit8.cpp NO_USE_PORTAUDIO=1 NO_USE_PIPEWIRE=1 NOWERROR=1 REGENIE=1 OPTIMIZE=2 SYMBOLS=0 -j"$(nproc)"
 cp cv1k "$HERE/bin/cv1k"
+strip "$HERE/bin/cv1k"   # drop debug info: ~67 MB -> ~46 MB
