@@ -3,6 +3,8 @@
 A CV1000-only MAME 0.289 build (`bin/cv1k`, Linux x86-64) plus scripts for scripted, headless runs,
 for private testing with your own dumps. No ROM data is included.
 Works with the CV1000 sets (mmpork, dfkbl, deathsml, pinkswts, ibarablk, ...).
+`scripts/build_mame.sh` also adds `matsuri15` (Mushihime-Sama Matsuri 1.5, custom set, clone of `mushisam`;
+files `matsuri15_u4`, `matsuri15_u2`, `u23`, `u24`). It is only in binaries built with the updated script.
 
 ## ROMs
 Put your sets in `roms/` as `<set>.zip` (or folders `roms/<set>/`).
