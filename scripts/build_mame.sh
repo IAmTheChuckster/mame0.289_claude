@@ -3,17 +3,19 @@
 # Builds one MAME binary per driver into bin/<driver> (default: all drivers, tag mame0289).
 #   cv1k : CV1000 driver, with akatana and ddpsdoj re-enabled and the custom matsuri15 set added
 #   cave : MAME's older 68000-based Cave driver (dfeveron, feversos, ...)
+#   batsugun : Toaplan's Batsugun (batsugun, batsugunsp Special Version, ...)
 # To add a driver: add a line to the case below with its name and its source files.
 set -e
 HERE=$(cd "$(dirname "$0")/.." && pwd)
 case "$1" in mame*) set -- all "$@";; esac   # old usage: build_mame.sh <tag>
 DRIVER=${1:-all}; TAG=${2:-mame0289}; DIR=${3:-$HOME/mame-src}
-DRIVERS="cv1k cave"
+DRIVERS="cv1k cave batsugun"
 CV1K_V=src/mame/cave/cv1k_v.cpp; for i in 0 1 2 3 4 5 6 7 8; do CV1K_V=$CV1K_V,src/mame/cave/cv1k_v_blit$i.cpp; done
 case "$DRIVER" in
   all)  for d in $DRIVERS; do sh "$0" "$d" "$TAG" "$DIR"; done; exit 0;;
   cv1k) SOURCES=src/mame/cave/cv1k.cpp,$CV1K_V;;
   cave) SOURCES=src/mame/atlus/cave.cpp,src/mame/atlus/cave_v.cpp,src/mame/atlus/sprite013.cpp;;
+  batsugun) SOURCES=src/mame/toaplan/batsugun.cpp,src/mame/toaplan/gp9001.cpp,src/mame/toaplan/toaplan_coincounter.cpp;;
   *)    echo "unknown driver '$DRIVER' (known: $DRIVERS, all)" >&2; exit 1;;
 esac
 [ -d "$DIR" ] || git clone --depth 1 --branch "$TAG" https://github.com/mamedev/mame.git "$DIR"
