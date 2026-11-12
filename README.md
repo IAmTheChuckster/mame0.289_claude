@@ -48,8 +48,9 @@ To add a driver, add a line with its name and source files to the `case` in `scr
 ## Testing
 Tested working with WSL Ubuntu-24.04
 1. Copy the rom to <code>&#92;&#92;wsl$&#92;Ubuntu-24.04&#92;home&#92;<b>user</b>&#92;mame&#92;roms</code>
-2. run <code>cd ~/mame && GAME=<b>name of rom</b> scripts/boot_test.sh 1500</code>
-3. screenshots are in `mame/work/snap/rom/`
+2. run <code>chmod +x ~/mame/bin/* ~/mame/scripts/*.sh</code> to make the program runnable again
+3. run <code>cd ~/mame && GAME=<b>name of rom</b> scripts/boot_test.sh 1500</code>
+4. screenshots are in `mame/work/snap/rom/`
 
 ## Credits
 - [IAmTheChuckster](https://github.com/IAmTheChuckster): project owner
